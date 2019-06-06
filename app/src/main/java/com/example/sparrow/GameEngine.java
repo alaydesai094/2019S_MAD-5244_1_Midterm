@@ -40,6 +40,8 @@ public class GameEngine extends SurfaceView implements Runnable {
     // SPRITES
     Square bullet;
     int SQUARE_WIDTH = 100;
+    int CAGE_SPEED = 20;
+    int CAT_SPEED = 10;
 
     Square enemy;
 
@@ -88,8 +90,60 @@ public class GameEngine extends SurfaceView implements Runnable {
         }
     }
 
+    boolean movingleft = true;
+
     // Game Loop methods
     public void updateGame() {
+
+
+        if (movingleft == true) {
+            this.cage.setxPosition(this.cage.getxPosition() + this.CAGE_SPEED);
+
+
+        }
+        else {
+            this.cage.setxPosition(this.cage.getxPosition() - this.CAGE_SPEED);
+
+
+        }
+
+        // @TODO: Collision detection code
+        if (this.cage.getxPosition() > this.VISIBLE_RIGHT) {
+            Log.d(TAG, "Ball reached bottom of screen. Changing direction!");
+            movingleft = false;
+        }
+
+        if (this.cage.getxPosition() < this.VISIBLE_LEFT) {
+            Log.d(TAG, "Ball reached bottom of screen. Changing direction!");
+            movingleft = true;
+            //this.score = this.score + 1;
+        }
+
+
+        if (movingleft == true) {
+            this.cat.setxPosition(this.cat.getxPosition() + this.CAT_SPEED);
+
+
+        }
+        else {
+            this.cat.setxPosition(this.cat.getxPosition() - this.CAT_SPEED);
+
+
+        }
+
+        // @TODO: Collision detection code
+        if (this.cat.getxPosition() > this.VISIBLE_RIGHT) {
+            Log.d(TAG, "Ball reached bottom of screen. Changing direction!");
+            movingleft = false;
+        }
+
+        if (this.cat.getxPosition() < this.VISIBLE_LEFT) {
+            Log.d(TAG, "Ball reached bottom of screen. Changing direction!");
+            movingleft = true;
+            //this.score = this.score + 1;
+        }
+
+
     }
 
 
