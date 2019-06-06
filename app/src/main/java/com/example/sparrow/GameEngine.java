@@ -61,6 +61,7 @@ public class GameEngine extends SurfaceView implements Runnable {
 
     // GAME STATS
     int score = 0;
+    boolean gameOver = false;
 
     public GameEngine(Context context, int screenW, int screenH) {
         super(context);
@@ -216,16 +217,18 @@ public class GameEngine extends SurfaceView implements Runnable {
         if (bullet.getHitbox().intersect(cage.getHitbox())) {
 
             // UPDATE THE cage movement
-            this.cage.setyPosition(this.cage.getyPosition() + this.VISIBLE_BOTTOM - 300);
+            this.cage.setyPosition(this.cage.getyPosition() + this.VISIBLE_BOTTOM);
             this.cage.updateHitbox();
+
+            if(this.cage.getyPosition() > this.screenHeight-300){
+
+
+            }
+
+
+            }
         }
 
-
-
-
-
-
-    }
 
 
     public void outputVisibleArea() {
@@ -330,6 +333,14 @@ public class GameEngine extends SurfaceView implements Runnable {
             canvas.drawText(screenInfo, 10, 100, paintbrush);
 
             // --------------------------------
+
+            if (gameOver == true) {
+                paintbrush.setTextSize(60);
+                paintbrush.setColor(Color.RED);
+                paintbrush.setStrokeWidth(5);
+                canvas.drawText("GAME OVER!", 50, 200, paintbrush);
+            }
+
             holder.unlockCanvasAndPost(canvas);
         }
 
