@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     // screen size variables
     Display display;
     Point size;
+
     int screenHeight;
     int screenWidth;
 

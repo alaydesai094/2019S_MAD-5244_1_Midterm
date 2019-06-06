@@ -45,6 +45,9 @@ public class GameEngine extends SurfaceView implements Runnable {
 
     Sprite player;
     Sprite sparrow;
+    Sprite cat;
+    Sprite cage;
+
 
     ArrayList<Square> bullets = new ArrayList<Square>();
 
@@ -72,6 +75,8 @@ public class GameEngine extends SurfaceView implements Runnable {
         // initalize sprites
         this.player = new Sprite(this.getContext(), 100, 700, R.drawable.player64);
         this.sparrow = new Sprite(this.getContext(), 500, 200, R.drawable.bird64);
+        this.cat = new Sprite(this.getContext(), 1500, 700, R.drawable.cat64);
+        this.cage = new Sprite(this.getContext(), 1500, 100, R.drawable.robot64);
     }
 
     @Override
@@ -129,6 +134,12 @@ public class GameEngine extends SurfaceView implements Runnable {
 
             // 2. sparrow
             canvas.drawBitmap(this.sparrow.getImage(), this.sparrow.getxPosition(), this.sparrow.getyPosition(), paintbrush);
+
+            //3. cat
+            canvas.drawBitmap(this.cat.getImage(), this.cat.getxPosition(), this.cat.getyPosition(), paintbrush);
+
+            //4.
+            canvas.drawBitmap(this.cage.getImage(), this.cage.getxPosition(), this.cage.getyPosition(), paintbrush);
 
             // --------------------------------------------------------
             // draw hitbox on player
