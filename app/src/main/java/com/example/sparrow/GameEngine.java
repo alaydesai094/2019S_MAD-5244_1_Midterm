@@ -11,6 +11,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameEngine extends SurfaceView implements Runnable {
     private final String TAG = "SPARROW";
@@ -86,12 +87,12 @@ public class GameEngine extends SurfaceView implements Runnable {
         this.cage = new Sprite(this.getContext(), 1500, 100, R.drawable.robot64);
         this.bullet = new Square(context, 100, 700, SQUARE_WIDTH);
 
-        // make bullets
-        for (int i = 0; i < 4;i++) {
-            this.bullets.add(new Square(context, -200, 550, SQUARE_WIDTH));
-        }
+//        // make bullets
+//        for (int i = 0; i < 4;i++) {
+//            this.bullets.add(new Square(context, -200, 550, SQUARE_WIDTH));
+//        }
 
-        this.bullet2 = new Square(context, 100, 700, SQUARE_WIDTH);
+       // this.bullet2 = new Square(context, 100, 700, SQUARE_WIDTH);
 
     }
 
@@ -108,6 +109,16 @@ public class GameEngine extends SurfaceView implements Runnable {
 
     // Game Loop methods
     public void updateGame() {
+
+        //Random Sparrow position
+
+        Random r = new Random();
+        int randomXPos = r.nextInt(this.screenWidth) + 1;
+        int randomYPos = r.nextInt(this.screenHeight) + 1;
+
+        this.sparrow.setxPosition(randomXPos);
+        this.sparrow.setyPosition(randomYPos);
+
 
 
         // Moving Cage
@@ -186,8 +197,6 @@ public class GameEngine extends SurfaceView implements Runnable {
 
         this.bullet.setxPosition(newX);
         this.bullet.setyPosition(newY);
-
-
 
     }
 
@@ -296,8 +305,8 @@ public class GameEngine extends SurfaceView implements Runnable {
             // user pushed down on screen
 
             Log.d(TAG, "The person tapped: (" + event.getX() + "," + event.getY() + ")");
-           this.updatedX = (int)event.getX();
-           this.updatedY = (int)event.getY();
+            this.updatedX = (int)event.getX();
+            this.updatedY = (int)event.getY();
 
 
 
@@ -329,4 +338,3 @@ public class GameEngine extends SurfaceView implements Runnable {
     }
 
 }
-
