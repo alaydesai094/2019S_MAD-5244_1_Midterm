@@ -87,12 +87,6 @@ public class GameEngine extends SurfaceView implements Runnable {
         this.cage = new Sprite(this.getContext(), 1500, 100, R.drawable.robot64);
         this.bullet = new Square(context, 100, 700, SQUARE_WIDTH);
 
-//        // make bullets
-//        for (int i = 0; i < 4;i++) {
-//            this.bullets.add(new Square(context, -200, 550, SQUARE_WIDTH));
-//        }
-
-       // this.bullet2 = new Square(context, 100, 700, SQUARE_WIDTH);
 
     }
 
@@ -111,13 +105,17 @@ public class GameEngine extends SurfaceView implements Runnable {
     public void updateGame() {
 
         //Random Sparrow position
-
         Random r = new Random();
-        int randomXPos = r.nextInt(this.screenWidth) + 1;
-        int randomYPos = r.nextInt(this.screenHeight) + 1;
+        int randX = r.nextInt(this.screenWidth) + 1;
+        int randY = r.nextInt(this.screenHeight) + 1;
 
-        this.sparrow.setxPosition(randomXPos);
-        this.sparrow.setyPosition(randomYPos);
+        // Moving Bird
+        this.sparrow.setxPosition(randX - 10);
+        this.sparrow.setyPosition(randY - 10);
+
+        //Update Hitbox
+        this.sparrow.updateHitbox();
+
 
 
 
@@ -145,6 +143,9 @@ public class GameEngine extends SurfaceView implements Runnable {
             //this.score = this.score + 1;
         }
 
+        //Upate hitbox
+        this.cage.updateHitbox();
+
 
         // Moving Cat
 
@@ -171,7 +172,12 @@ public class GameEngine extends SurfaceView implements Runnable {
             //this.score = this.score + 1;
         }
 
-        // Moving Bird
+        this.cat.updateHitbox();
+
+
+
+
+
 
         // Moving bullet
         // MAKE BULLET MOVE
@@ -197,6 +203,20 @@ public class GameEngine extends SurfaceView implements Runnable {
 
         this.bullet.setxPosition(newX);
         this.bullet.setyPosition(newY);
+
+        //Upate hitbox
+
+        this.bullet.updateHitbox();
+
+
+        //---------------
+        //Colision Detection
+        //-------------------
+
+
+
+
+
 
     }
 
@@ -269,6 +289,29 @@ public class GameEngine extends SurfaceView implements Runnable {
             Rect r = player.getHitbox();
             paintbrush.setStyle(Paint.Style.STROKE);
             canvas.drawRect(r, paintbrush);
+
+            //hit box on sparrow
+            Rect sp = sparrow.getHitbox();
+            paintbrush.setStyle(Paint.Style.STROKE);
+            canvas.drawRect(sp, paintbrush);
+
+            //hit box on cage
+            Rect cg = cage.getHitbox();
+            paintbrush.setStyle(Paint.Style.STROKE);
+            canvas.drawRect(cg, paintbrush);
+
+            //hit box on bullet
+            Rect bu = bullet.getHitbox();
+            paintbrush.setStyle(Paint.Style.STROKE);
+            canvas.drawRect(bu, paintbrush);
+
+            //hit box on cat
+            Rect ct = cat.getHitbox();
+            paintbrush.setStyle(Paint.Style.STROKE);
+            canvas.drawRect(ct, paintbrush);
+
+
+
 
 
             // --------------------------------------------------------
