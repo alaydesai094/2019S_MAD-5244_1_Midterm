@@ -101,6 +101,9 @@ public class GameEngine extends SurfaceView implements Runnable {
 
     boolean movingleft = true;
 
+    boolean cagefall = true;
+
+
     // Game Loop methods
     public void updateGame() {
 
@@ -116,16 +119,13 @@ public class GameEngine extends SurfaceView implements Runnable {
         //Update Hitbox
         this.sparrow.updateHitbox();
 
-
-
-
         // Moving Cage
         if (movingleft == true) {
+
             this.cage.setxPosition(this.cage.getxPosition() + this.CAGE_SPEED);
 
 
-        }
-        else {
+        } else {
             this.cage.setxPosition(this.cage.getxPosition() - this.CAGE_SPEED);
 
 
@@ -212,6 +212,13 @@ public class GameEngine extends SurfaceView implements Runnable {
         //---------------
         //Colision Detection
         //-------------------
+
+        if (bullet.getHitbox().intersect(cage.getHitbox())) {
+
+            // UPDATE THE cage movement
+            this.cage.setyPosition(this.cage.getyPosition() + this.VISIBLE_BOTTOM - 300);
+            this.cage.updateHitbox();
+        }
 
 
 
